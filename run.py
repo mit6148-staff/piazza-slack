@@ -17,8 +17,11 @@ def get_url(post):
     return "https://piazza.com/class/{}?cid={}".format(CLASS_ID, post['nr'])
 
 def iter_posts():
-	for post in weblab.get_feed(limit=999999, offset=0)['feed']:
-		yield post
+	try:
+		for post in weblab.get_feed(limit=999999, offset=0)['feed']:
+			yield post
+	except: #todo real error handling
+		print("couldn't read posts")
 
 while True:
 	print("polling piazza")
